@@ -34,7 +34,7 @@ To run the project you need to have Node.js installed. If/after you do it, you o
 To install Grunt CLI run `npm install -g grunt-cli` in your node terminal. Then you can follow [this 3 points](https://gruntjs.com/getting-started#working-with-an-existing-grunt-project) and you should be good.
 
 
-Use `grunt` command to update `built.js` file (which is `main.js` and `features.js` combined into one).
+Use `grunt` command to update `built.js` file (which is `main.js` and `features.js` combined into one). It will fire contrib-concat plugin that concats both these files.
 
 #### Files structure
 ```
