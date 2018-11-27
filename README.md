@@ -1,5 +1,5 @@
 # Syl
-Pseudo AI with eventual aspirations for AI. Project is build with specifically Raspberry Pi in mind. It listens and speaks.
+Pseudo AI with eventual aspirations for AI. Project is build with specifically Raspberry Pi in mind (see Syl-RaspberryPI repo). It listens and speaks.
 
 ### Go to:
 1. [Technology stack](#technology-stack)
@@ -12,7 +12,7 @@ Pseudo AI with eventual aspirations for AI. Project is build with specifically R
 ## Technology stack
 Currently project uses:
  - HTML - structure of the web page, currently the only way to use the app
- - JavaScript - no front-end frameworks or libraries. App uses speech recognition and speech synthesis (more on that later). Node.js and Grunt.js for easier deployment and to run it on final platform (Raspberry Pi)
+ - JavaScript - no front-end frameworks or libraries. App uses speech recognition and speech synthesis (more on that later). Node.js and Grunt.js for easier deployment and to run it on final platform (Raspberry Pi).
 This list will be longer as the project will get more complex.
 
 ## Deploy
@@ -71,6 +71,8 @@ Currently Syl can tell you:
 and maybe something else. I don't know it's still under intense development! To see more stuff I'm planning visit issue about new features.
 
 ## General idea and plans
+TL;DR: Adding more options, fixing bugs, improving/adding algorithms. Migrating for Raspberry Pi (see Syl-RaspberryPi repo).
+
 My main focus right now is to make this project specifically for Raspberry Pi. Although I also want it to work in the browser kinda like it works now but with more options and chat. I'm planning to add much more features and commands and to keep doing it. I think that's how most of the contributions will look like after the core is ready. I don't wanna use any framewokrs or libraries (or at least as few as possible). I also would like to make a version for mobile phones (android) but this might be a veeeery far future. I'm open for some cool ideas.
 
 ## Contact
