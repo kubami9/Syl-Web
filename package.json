@@ -1,7 +1,7 @@
 {
   "name": "syl_project",
   "version": "1.0.0",
-  "description": "",
+  "description": "Pseudo AI with eventual aspirations for AI. Project is build with specifically Raspberry Pi in mind. It listens and speaks.",
   "main": "main.js",
   "dependencies": {},
   "devDependencies": {

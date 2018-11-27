@@ -48,6 +48,8 @@ recognition.onresult = function(event) {
 // Once we end speaking, the recognition is stopped
 recognition.onspeechend = function() {
     recognition.stop();
+    // Starting answer() function, line 117 (of main.js)
+    answer();
 }
 
 
@@ -67,7 +69,6 @@ langBtn.onclick = function() {
 // setting up speech synthesis and picking DOM elements
 var synth = window.speechSynthesis;
 var voiceSelect = document.querySelector('select');
-var speakBtn = document.getElementById("speak");
 
 // Text we want to read, basically program answer, determined later on
 var textToRead = "Honestly I have no clue what you're just saying.";
@@ -113,7 +114,7 @@ if (speechSynthesis.onvoiceschanged !== undefined) {
   }
 
 // Speaking!
-speakBtn.onclick = function() {
+function answer() {
     checkForCommands();
     // Program answer, exactly the parameter in the SpeechSynthesisUtterance brackets
     var utterThis = new SpeechSynthesisUtterance(textToRead);
