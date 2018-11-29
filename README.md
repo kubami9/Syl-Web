@@ -1,5 +1,5 @@
 # Syl
-Pseudo AI with eventual aspirations for AI. Project is build with specifically Raspberry Pi in mind (see Syl-RaspberryPI repo). It listens and speaks.
+Simple robot with eventual aspirations for robot. Project is build with specifically Raspberry Pi in mind (see Syl-RaspberryPI repo). It listens and speaks.
 
 ### Go to:
 1. [Technology stack](#technology-stack)
