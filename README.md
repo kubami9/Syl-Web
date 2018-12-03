@@ -1,4 +1,10 @@
 # Syl
+
+![issues](https://img.shields.io/github/issues/kubami9/Syl-Web.svg)
+![license](https://img.shields.io/github/license/kubami9/Syl-Web.svg)
+![Tweet](https://img.shields.io/twitter/url/https/github.com/kubami9/Syl-Web.svg?style=social)
+
+
 Simple robot with eventual aspirations for robot. Project is build with specifically Raspberry Pi in mind (see Syl-RaspberryPI repo). It listens and speaks.
 
 ### Go to:
