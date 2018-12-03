@@ -2,6 +2,7 @@
 
 ![issues](https://img.shields.io/github/issues/kubami9/Syl-Web.svg)
 ![license](https://img.shields.io/github/license/kubami9/Syl-Web.svg)
+![phase](https://img.shields.io/badge/phase-alpha-red.svg)
 
 
 Simple robot with eventual aspirations for robot. Project is build with specifically Raspberry Pi in mind (see Syl-RaspberryPI repo). It listens and speaks.
