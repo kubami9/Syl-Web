@@ -1,5 +1,11 @@
 # Syl
-Pseudo AI with eventual aspirations for AI. Project is build with specifically Raspberry Pi in mind (see Syl-RaspberryPI repo). It listens and speaks.
+
+![issues](https://img.shields.io/github/issues/kubami9/Syl-Web.svg)
+![license](https://img.shields.io/github/license/kubami9/Syl-Web.svg)
+![phase](https://img.shields.io/badge/phase-alpha-red.svg)
+
+
+Simple robot with eventual aspirations for robot. Project is build with specifically Raspberry Pi in mind (see Syl-RaspberryPI repo). It listens and speaks.
 
 ### Go to:
 1. [Technology stack](#technology-stack)
@@ -24,7 +30,7 @@ window.speechSynthesis.speak(msg)
 If you get speech output then it's supported. Web Speech API has support for all the latest Chrome/ium browsers. More on that [here](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API#Browser_compatibility). I'm aware it's not currently working on mobile ;(
 
 
-Live preview: https://kubami9.github.io/Syl/
+Live preview: https://kubami9.github.io/Syl-Web/
 
 ## Contributing
 This project is currently in it's alfa, which means there are many things to do and some of them will set the path for further ideas. If you would like to become a part of it you can check out issues and if there's something that's not assigned to me you can feel free to write a comment and take it. There won't be so many free issues at the very beginning as I want to make some things on my own so the project can take a path that I have in mind.
