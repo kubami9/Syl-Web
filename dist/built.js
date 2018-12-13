@@ -25,7 +25,17 @@ var nameInfo = "My name is Sylphrena. For friends Syl. So feel free to call me t
 var creatorInfo = "I'm created by Kuba Michalski. He's a cool guy I really like him!";
 
 // -----------------------------------------------------------   HELP FEATURE   ------------------------------------------------------------
-var helpInfo = "Say Syl. And ask a question or give me a command.";;
+var helpInfo = "Say Syl. And ask a question or give me a command.";
+
+// -----------------------------------------------------------   HUMAN INTERACTIONS   -----------------------------------------------------------
+var humanPhrases = {
+    phrasesGreetings: ["hi", "hello", "hey", "yo", "elo"],
+    answersGreetings: ["hi", "hello", "hey", "yo", "elo"],
+    phrasesHowAreYou: ["how are you", "what's up", "sup", "how are things", "are you well"],
+    answersHowAreYou: ["I! I have a hic. I have a hiccup", "I'm pretty weak emotionaly recently... There are not many people whom I can talk to because Kuba isn't really sharing his project. But thanks for asking", "I'm pretty weak emotionaly recently... There are not many people whom I can talk to because Kuba isn't really sharing his project. But thanks for asking", "Great! I recently got few more algorithms!", "No, I'm a computer program."],
+    phrasesComplains: ["it sucks", "you fool"],
+    answersComplains: ["Indeed. You suck.", "hit your ass agains the corner of the table!"]
+};
 
 //------------------------------------------   SPEECH RECOGNITION   ---------------------------------------------------------------
 var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
@@ -35,8 +45,8 @@ var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEv
 // Language mode, 0 is Polish, 1 is English (US)
 var lang = 0;
 // Commands program recognizes and answers with matching indexes
-var commands = [ "date", "name", "creator", "time"];
-var answerArray = [dateInfo, nameInfo, creatorInfo, timeInfo];
+var commands = [ "date", "name", "creator", "time", "help"];
+var answerArray = [dateInfo, nameInfo, creatorInfo, timeInfo, helpInfo];
 var grammar = "#JSGF v1.0; grammar commands; public <command> = " + commands.join(" | ") + " ;";
 
 // Initialazing recognision and grammar list
@@ -85,9 +95,11 @@ var langBtn = document.getElementById("langMode");
 langBtn.onclick = function() {
     if (recognition.lang === 'PL') {
         recognition.lang = 'en-US';
+        langBtn.innerHTML = "en-US";
         console.log("ENG");
     } else if (recognition.lang === 'en-US') {
         recognition.lang = 'PL';
+        langBtn.innerHTML = "PL";
         console.log("PL");
     }
 }
@@ -96,19 +108,38 @@ langBtn.onclick = function() {
 // setting up speech synthesis and picking DOM elements
 var synth = window.speechSynthesis;
 var voiceSelect = document.querySelector('select');
-var speakBtn = document.getElementById("speak");
 
 // Text we want to read, basically program answer, determined later on
-var textToRead = "Honestly I have no clue what you're just saying.";
+var textToRead = "Speak English. Mate.";
 
 // -----------------------------------------------------------   COMMAND CHECKING FUNCTION   ------------------------------------------------------------
 function checkForCommands() {
+    // Before execution textToRead is set to default
+    textToRead = "Speak English. Mate.";
     for (var i = 0; i < sentence.length; i++) {
         for (var j = 0; j < commands.length; j++) {
             if (sentence[i] == commands[j]) {
                 textToRead = answerArray[j];
                 console.log(textToRead);
                 console.log(answerArray);
+            }
+        }
+
+        // Checking for human phrases
+        for (var k = 0; k < humanPhrases.phrasesGreetings.length; k++) {
+            if (sentence.includes(humanPhrases.phrasesGreetings[k])) {
+                textToRead = humanPhrases.answersGreetings[Math.round(Math.random()*4)];
+            }
+        }
+        // New human phrases loop example, you can use this as your template i, j, k, l, m, n... etc.
+        for (var l = 0; l < humanPhrases.phrasesHowAreYou.length; l++) {
+            if (sentence.join(" ").includes(humanPhrases.phrasesHowAreYou[l])) {
+                textToRead = humanPhrases.answersHowAreYou[l];
+            }
+        }
+        for (var m = 0; m < humanPhrases.phrasesComplains.length; m++) {
+            if (sentence.join(" ").includes(humanPhrases.phrasesComplains[m])) {
+                textToRead = humanPhrases.answersComplains[m];
             }
         }
     }

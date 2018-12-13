@@ -26,3 +26,13 @@ var creatorInfo = "I'm created by Kuba Michalski. He's a cool guy I really like 
 
 // -----------------------------------------------------------   HELP FEATURE   ------------------------------------------------------------
 var helpInfo = "Say Syl. And ask a question or give me a command.";
+
+// -----------------------------------------------------------   HUMAN INTERACTIONS   -----------------------------------------------------------
+var humanPhrases = {
+    phrasesGreetings: ["hi", "hello", "hey", "yo", "elo"],
+    answersGreetings: ["hi", "hello", "hey", "yo", "elo"],
+    phrasesHowAreYou: ["how are you", "what's up", "sup", "how are things", "are you well"],
+    answersHowAreYou: ["I! I have a hic. I have a hiccup", "I'm pretty weak emotionaly recently... There are not many people whom I can talk to because Kuba isn't really sharing his project. But thanks for asking", "I'm pretty weak emotionaly recently... There are not many people whom I can talk to because Kuba isn't really sharing his project. But thanks for asking", "Great! I recently got few more algorithms!", "No, I'm a computer program."],
+    phrasesComplains: ["it sucks", "you fool"],
+    answersComplains: ["Indeed. You suck.", "hit your ass agains the corner of the table!"]
+}
