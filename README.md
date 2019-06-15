@@ -1,5 +1,6 @@
 # Syl
 
+**Currently I'm not working on this project. But I'm planing to get back to it, refactor old/ugly/*hack-it-just-works...* code and maybe change the direction of project a little bit. IDK when though, maybe this month. (wrttten in June 2019)**  
 
 ![issues](https://img.shields.io/github/issues/kubami9/Syl-Web.svg)
 ![license](https://img.shields.io/github/license/kubami9/Syl-Web.svg)
