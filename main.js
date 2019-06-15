@@ -8,8 +8,8 @@ var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEv
 // Language mode, 0 is Polish, 1 is English (US)
 var lang = 0;
 // Commands program recognizes and answers with matching indexes
-var commands = [ "date", "name", "creator", "time", "help"];
-var answerArray = [dateInfo, nameInfo, creatorInfo, timeInfo, helpInfo];
+var commands = [ "date", "name", "creator", "time", "help", "joke"];
+var answerArray = [dateInfo, nameInfo, creatorInfo, timeInfo, helpInfo, jokesInfo];
 var grammar = "#JSGF v1.0; grammar commands; public <command> = " + commands.join(" | ") + " ;";
 
 // Initialazing recognision and grammar list
@@ -80,14 +80,6 @@ function checkForCommands() {
     // Before execution textToRead is set to default
     textToRead = "Speak English. Mate.";
     for (var i = 0; i < sentence.length; i++) {
-        for (var j = 0; j < commands.length; j++) {
-            if (sentence[i] == commands[j]) {
-                textToRead = answerArray[j];
-                console.log(textToRead);
-                console.log(answerArray);
-            }
-        }
-
         // Checking for human phrases
         for (var k = 0; k < humanPhrases.phrasesGreetings.length; k++) {
             if (sentence.includes(humanPhrases.phrasesGreetings[k])) {
@@ -105,6 +97,21 @@ function checkForCommands() {
                 textToRead = humanPhrases.answersComplains[m];
             }
         }
+        for (var n = 0; n < humanPhrases.phrasesCommonQuestions.length; n++) {
+            if (sentence.join(" ").includes(humanPhrases.phrasesCommonQuestions[n])) {
+                textToRead = humanPhrases.answersCommonQuestions[n];
+            }
+        }
+
+        // Checking for commands
+        for (var j = 0; j < commands.length; j++) {
+            if (sentence[i] == commands[j]) {
+                textToRead = answerArray[j];
+                console.log(textToRead);
+                console.log(answerArray);
+            }
+        }
+
     }
 }
 
@@ -149,3 +156,10 @@ function answer() {
     }
     synth.speak(utterThis);
 }
+
+// This solves the problem of too long sentences. Now it's not breaking the program.
+function resumeInfinity() {
+    window.speechSynthesis.resume();
+    timeoutResumeInfinity = setTimeout(resumeInfinity, 1000);
+}
+resumeInfinity();

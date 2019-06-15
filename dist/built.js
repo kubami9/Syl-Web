@@ -9,7 +9,7 @@ var dateObj = {
     weekDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
     months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
 }
-var dateInfo = "Today is " + dateObj.weekDays[dateObj.day] + ". " + dateObj.dayOfMonth + " " + dateObj.months[dateObj.month] + " " + dateObj.year + ". Make the best out of it!";
+var dateInfo = "Today is " + dateObj.weekDays[dateObj.day - 1] + ". " + dateObj.dayOfMonth + " " + dateObj.months[dateObj.month] + " " + dateObj.year + ". Make the best out of it!";
 
 // -----------------------------------------------------------   TIME FEATURE   ----------------------------------
 var timeObj = {
@@ -22,19 +22,54 @@ var timeInfo = "It's " + timeObj.hour + ":" + timeObj.minute + ".";
 var nameInfo = "My name is Sylphrena. For friends Syl. So feel free to call me this way.";
 
 // -----------------------------------------------------------   CREATOR FEATURE   ------------------------------------------------------------
-var creatorInfo = "I'm created by Kuba Michalski. He's a cool guy I really like him!";
+var creatorInfo = "I'm created by Kuba Michalski. He's a cool guy i really like him!";
 
 // -----------------------------------------------------------   HELP FEATURE   ------------------------------------------------------------
 var helpInfo = "Say Syl. And ask a question or give me a command.";
 
+// -----------------------------------------------------------    JOKES ------------------------------------------------------------
+var jokes = ["So... You may be wondering where you know my voice from. It may be helpful for you if I start saying. Warsaw East station. Possible change to long-distance trains and buses.", "Your singing performance was the best one so far.", "I don't like using public toilets for many reasons. One of them are men farting pretty loudly. Now you may be wondering, why do I talk about male toilets if I'm female. Well. Technically speaking I'm genderless since I'm just a piece of code, but my owner is male. So he really doesn't like it as well. That's why when we can we prefer to go to the female toilets. They are much more discreet. At least when they know we're here."];
+
+var jokesInfo = jokes[Math.round(Math.random() * (jokes.length - 1))];
+
+// ----------------------------------------------------------- WEATHER FEATURE ----------------------------------------------------------
+var weatherInfo = 'test';
+navigator.geolocation.getCurrentPosition(function(position) {
+
+    var lati = position.coords.latitude;
+    var long = position.coords.longitude;
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'api.openweathermap.org/data/2.5/weather?lat=' + toString(lati) + '&lon=' + toString(long) + '&appid=$f1c0b3f419ad2992bfebd3104df6d7a7', true);
+
+    xhr.onload = function() {
+        var data = JSON.parse(this.response);
+        weatherInfo = data;
+    }
+
+    xhr.send();
+
+    console.log(lati + " " + lang);
+});
+console.log(weatherInfo);
+
+
+
+
+
+
+
+
 // -----------------------------------------------------------   HUMAN INTERACTIONS   -----------------------------------------------------------
 var humanPhrases = {
-    phrasesGreetings: ["hi", "hello", "hey", "yo", "elo"],
-    answersGreetings: ["hi", "hello", "hey", "yo", "elo"],
+    phrasesGreetings: ["hi", "hello", "hey", "yo"],
+    answersGreetings: ["hi", "hello", "hey", "yo"],
     phrasesHowAreYou: ["how are you", "what's up", "sup", "how are things", "are you well"],
     answersHowAreYou: ["I! I have a hic. I have a hiccup", "I'm pretty weak emotionaly recently... There are not many people whom I can talk to because Kuba isn't really sharing his project. But thanks for asking", "I'm pretty weak emotionaly recently... There are not many people whom I can talk to because Kuba isn't really sharing his project. But thanks for asking", "Great! I recently got few more algorithms!", "No, I'm a computer program."],
-    phrasesComplains: ["it sucks", "you fool"],
-    answersComplains: ["Indeed. You suck.", "hit your ass agains the corner of the table!"]
+    phrasesComplains: ["it sucks", "you're stupid"],
+    answersComplains: ["Indeed. You suck.", "hit your ass agains the corner of the table!"],
+    phrasesCommonQuestions: ["my location", "test", "my data"],
+    answersCommonQuestions: ["I track your location to get the weather data... And to send you a Christmas gift if you're kind enough.", "running test number 3905834397B Alpha Omnitrix. . Government data has been succesfully downloaded.", "Your data. Well. . We store it in unsecured servers where even my grandma can break into. . But no worries, people know 'shall not steal'"]
 };
 
 //------------------------------------------   SPEECH RECOGNITION   ---------------------------------------------------------------
@@ -45,8 +80,8 @@ var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEv
 // Language mode, 0 is Polish, 1 is English (US)
 var lang = 0;
 // Commands program recognizes and answers with matching indexes
-var commands = [ "date", "name", "creator", "time", "help"];
-var answerArray = [dateInfo, nameInfo, creatorInfo, timeInfo, helpInfo];
+var commands = [ "date", "name", "creator", "time", "help", "joke"];
+var answerArray = [dateInfo, nameInfo, creatorInfo, timeInfo, helpInfo, jokesInfo];
 var grammar = "#JSGF v1.0; grammar commands; public <command> = " + commands.join(" | ") + " ;";
 
 // Initialazing recognision and grammar list
@@ -117,14 +152,6 @@ function checkForCommands() {
     // Before execution textToRead is set to default
     textToRead = "Speak English. Mate.";
     for (var i = 0; i < sentence.length; i++) {
-        for (var j = 0; j < commands.length; j++) {
-            if (sentence[i] == commands[j]) {
-                textToRead = answerArray[j];
-                console.log(textToRead);
-                console.log(answerArray);
-            }
-        }
-
         // Checking for human phrases
         for (var k = 0; k < humanPhrases.phrasesGreetings.length; k++) {
             if (sentence.includes(humanPhrases.phrasesGreetings[k])) {
@@ -142,6 +169,21 @@ function checkForCommands() {
                 textToRead = humanPhrases.answersComplains[m];
             }
         }
+        for (var n = 0; n < humanPhrases.phrasesCommonQuestions.length; n++) {
+            if (sentence.join(" ").includes(humanPhrases.phrasesCommonQuestions[n])) {
+                textToRead = humanPhrases.answersCommonQuestions[n];
+            }
+        }
+
+        // Checking for commands
+        for (var j = 0; j < commands.length; j++) {
+            if (sentence[i] == commands[j]) {
+                textToRead = answerArray[j];
+                console.log(textToRead);
+                console.log(answerArray);
+            }
+        }
+
     }
 }
 
@@ -186,3 +228,10 @@ function answer() {
     }
     synth.speak(utterThis);
 }
+
+// This solves the problem of too long sentences. Now it's not breaking the program.
+function resumeInfinity() {
+    window.speechSynthesis.resume();
+    timeoutResumeInfinity = setTimeout(resumeInfinity, 1000);
+}
+resumeInfinity();
