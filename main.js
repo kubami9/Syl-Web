@@ -1,20 +1,20 @@
 
 
 //------------------------------------------   SPEECH RECOGNITION   ---------------------------------------------------------------
-var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
-var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList
-var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent
+const SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
+const SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList
+const SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent
 
 // Language mode, 0 is Polish, 1 is English (US)
-var lang = 0;
+let lang = 0;
 // Commands program recognizes and answers with matching indexes
-var commands = [ "date", "name", "creator", "time", "help", "joke"];
-var answerArray = [dateInfo, nameInfo, creatorInfo, timeInfo, helpInfo, jokesInfo];
-var grammar = "#JSGF v1.0; grammar commands; public <command> = " + commands.join(" | ") + " ;";
+const commands = [ "date", "name", "creator", "time", "help", "joke"];
+const answerArray = [dateInfo, nameInfo, creatorInfo, timeInfo, helpInfo, jokesInfo];
+const grammar = "#JSGF v1.0; grammar commands; public <command> = " + commands.join(" | ") + " ;";
 
 // Initialazing recognision and grammar list
-var recognition = new SpeechRecognition();
-var speechRecognitionList = new SpeechGrammarList();
+const recognition = new SpeechRecognition();
+const speechRecognitionList = new SpeechGrammarList();
 speechRecognitionList.addFromString(grammar, 1);
 
 // Setting up recognition options, default language (0) is Polish
@@ -25,11 +25,11 @@ recognition.interimResults = true;
 recognition.maxAlternatives = 1;
 
 // DOM elements
-var answerField = document.getElementById("answer");
-var record = document.getElementById("start");
+const answerField = document.getElementById("answer");
+const record = document.getElementById("start");
 
 // Array with the words from recognized sentence
-var sentence = [];
+let sentence = [];
 
 // When record button clicked starting new recognition
 record.onclick = function() {
@@ -39,7 +39,7 @@ record.onclick = function() {
 
 // Once we get the result it prints out the result word/sentence
 recognition.onresult = function(event) {
-    var last = event.results.length - 1;
+    const last = event.results.length - 1;
     answerField.innerHTML = event.results[last][0].transcript;
     sentence = (event.results[last][0].transcript.split(" "));
     console.log(sentence);
@@ -54,7 +54,7 @@ recognition.onspeechend = function() {
 
 
 // -----------------------------------   CHANGE LANGUAGE (PL/EN)  ----------------------------------------------------
-var langBtn = document.getElementById("langMode");
+const langBtn = document.getElementById("langMode");
 langBtn.onclick = function() {
     if (recognition.lang === 'PL') {
         recognition.lang = 'en-US';
@@ -69,42 +69,42 @@ langBtn.onclick = function() {
 
 // -----------------------------------   SPEECH SYNTHESIS  ----------------------------------------------------
 // setting up speech synthesis and picking DOM elements
-var synth = window.speechSynthesis;
-var voiceSelect = document.querySelector('select');
+const synth = window.speechSynthesis;
+const voiceSelect = document.querySelector('select');
 
 // Text we want to read, basically program answer, determined later on
-var textToRead = "Speak English. Mate.";
+let textToRead = "Speak English. Mate.";
 
 // -----------------------------------------------------------   COMMAND CHECKING FUNCTION   ------------------------------------------------------------
 function checkForCommands() {
     // Before execution textToRead is set to default
     textToRead = "Speak English. Mate.";
-    for (var i = 0; i < sentence.length; i++) {
+    for (let i = 0; i < sentence.length; i++) {
         // Checking for human phrases
-        for (var k = 0; k < humanPhrases.phrasesGreetings.length; k++) {
-            if (sentence.includes(humanPhrases.phrasesGreetings[k])) {
+        for (let greeting of humanPhrases.phrasesGreetings.length) {
+            if (sentence.includes(greeting)) {
                 textToRead = humanPhrases.answersGreetings[Math.round(Math.random()*4)];
             }
         }
         // New human phrases loop example, you can use this as your template i, j, k, l, m, n... etc.
-        for (var l = 0; l < humanPhrases.phrasesHowAreYou.length; l++) {
+        for (let l = 0; l < humanPhrases.phrasesHowAreYou.length; l++) {
             if (sentence.join(" ").includes(humanPhrases.phrasesHowAreYou[l])) {
                 textToRead = humanPhrases.answersHowAreYou[l];
             }
         }
-        for (var m = 0; m < humanPhrases.phrasesComplains.length; m++) {
+        for (let m = 0; m < humanPhrases.phrasesComplains.length; m++) {
             if (sentence.join(" ").includes(humanPhrases.phrasesComplains[m])) {
                 textToRead = humanPhrases.answersComplains[m];
             }
         }
-        for (var n = 0; n < humanPhrases.phrasesCommonQuestions.length; n++) {
+        for (let n = 0; n < humanPhrases.phrasesCommonQuestions.length; n++) {
             if (sentence.join(" ").includes(humanPhrases.phrasesCommonQuestions[n])) {
                 textToRead = humanPhrases.answersCommonQuestions[n];
             }
         }
 
         // Checking for commands
-        for (var j = 0; j < commands.length; j++) {
+        for (let j = 0; j < commands.length; j++) {
             if (sentence[i] == commands[j]) {
                 textToRead = answerArray[j];
                 console.log(textToRead);
@@ -116,22 +116,22 @@ function checkForCommands() {
 }
 
 // available voices to use
-var voices = [];
+let voices = [];
 
 // creating a list of available voices
 function populateVoiceList() {
     voices = synth.getVoices();
 
-    for(var i = 0; i < voices.length; i++) {
-        var option = document.createElement("option");
-        option.textContent = voices[i].name + " (" + voices[i].lang + ")";
+    for(let voice of voices) {
+        const option = document.createElement("option");
+        option.textContent = voice.name + " (" + voice.lang + ")";
 
-        if (voices[i].default) {
+        if (voice.default) {
             option.textContent += " - DEFAULT";
         }
 
-        option.setAttribute("data-lang", voices[i].lang);
-        option.setAttribute("data-name", voices[i].name);
+        option.setAttribute("data-lang", voice.lang);
+        option.setAttribute("data-name", voice.name);
         voiceSelect.appendChild(option);
     }
 }
@@ -146,12 +146,12 @@ if (speechSynthesis.onvoiceschanged !== undefined) {
 function answer() {
     checkForCommands();
     // Program answer, exactly the parameter in the SpeechSynthesisUtterance brackets
-    var utterThis = new SpeechSynthesisUtterance(textToRead);
+    const utterThis = new SpeechSynthesisUtterance(textToRead);
     // Selecting a voice
-    var selectedVoice = voiceSelect.selectedOptions[0].getAttribute("data-name");
-    for(var i = 0; i < voices.length; i++) {
-        if (voices[i].name === selectedVoice) {
-            utterThis.voice = voices[i];
+    const selectedVoice = voiceSelect.selectedOptions[0].getAttribute("data-name");
+    for (let voice of voices) {
+        if (voice.name === selectedVoice) {
+            utterThis.voice = voice;
         }
     }
     synth.speak(utterThis);

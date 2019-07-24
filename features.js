@@ -1,7 +1,7 @@
 // Freatures, answers of program... Data is stored in objects and the final answer is a string taking information from these objects. Each feature answer has a name {feature}Info. They are stored in answerArray in main.js file.
 // -----------------------------------------------------------   DATE FEATURE   ------------------------------------------------------------
-var date = new Date();
-var dateObj = {
+const date = new Date();
+let dateObj = {
     day: date.getDay(),
     dayOfMonth: date.getDate(),
     month: date.getMonth(),
@@ -9,41 +9,41 @@ var dateObj = {
     weekDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
     months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
 }
-var dateInfo = "Today is " + dateObj.weekDays[dateObj.day - 1] + ". " + dateObj.dayOfMonth + " " + dateObj.months[dateObj.month] + " " + dateObj.year + ". Make the best out of it!";
+const dateInfo = "Today is " + dateObj.weekDays[dateObj.day - 1] + ". " + dateObj.dayOfMonth + " " + dateObj.months[dateObj.month] + " " + dateObj.year + ". Make the best out of it!";
 
 // -----------------------------------------------------------   TIME FEATURE   ----------------------------------
-var timeObj = {
+let timeObj = {
     hour: date.getHours(),
     minute: date.getMinutes(),
 }
-var timeInfo = "It's " + timeObj.hour + ":" + timeObj.minute + ".";
+const timeInfo = "It's " + timeObj.hour + ":" + timeObj.minute + ".";
 
 // -----------------------------------------------------------   NAME FEATURE   ------------------------------------------------------------
-var nameInfo = "My name is Sylphrena. For friends Syl. So feel free to call me this way.";
+const nameInfo = "My name is Sylphrena. For friends Syl. So feel free to call me this way.";
 
 // -----------------------------------------------------------   CREATOR FEATURE   ------------------------------------------------------------
-var creatorInfo = "I'm created by Kuba Michalski. He's a cool guy i really like him!";
+const creatorInfo = "I'm created by Kuba Michalski. He's a cool guy i really like him!";
 
 // -----------------------------------------------------------   HELP FEATURE   ------------------------------------------------------------
-var helpInfo = "Say Syl. And ask a question or give me a command.";
+const helpInfo = "Say Syl. And ask a question or give me a command.";
 
 // -----------------------------------------------------------    JOKES ------------------------------------------------------------
-var jokes = ["So... You may be wondering where you know my voice from. It may be helpful for you if I start saying. Warsaw East station. Possible change to long-distance trains and buses.", "Your singing performance was the best one so far.", "I don't like using public toilets for many reasons. One of them are men farting pretty loudly. Now you may be wondering, why do I talk about male toilets if I'm female. Well. Technically speaking I'm genderless since I'm just a piece of code, but my owner is male. So he really doesn't like it as well. That's why when we can we prefer to go to the female toilets. They are much more discreet. At least when they know we're here."];
+const jokes = ["So... You may be wondering where you know my voice from. It may be helpful for you if I start saying. Warsaw East station. Possible change to long-distance trains and buses.", "Your singing performance was the best one so far.", "I don't like using public toilets for many reasons. One of them are men farting pretty loudly. Now you may be wondering, why do I talk about male toilets if I'm female. Well. Technically speaking I'm genderless since I'm just a piece of code, but my owner is male. So he really doesn't like it as well. That's why when we can we prefer to go to the female toilets. They are much more discreet. At least when they know we're here."];
 
-var jokesInfo = jokes[Math.round(Math.random() * (jokes.length - 1))];
+let jokesInfo = jokes[Math.round(Math.random() * (jokes.length - 1))];
 
 // ----------------------------------------------------------- WEATHER FEATURE ----------------------------------------------------------
-var weatherInfo = 'test';
+let weatherInfo = 'test';
 navigator.geolocation.getCurrentPosition(function(position) {
 
-    var lati = position.coords.latitude;
-    var long = position.coords.longitude;
+    let lati = position.coords.latitude;
+    let long = position.coords.longitude;
 
-    var xhr = new XMLHttpRequest();
+    let xhr = new XMLHttpRequest();
     xhr.open('GET', 'api.openweathermap.org/data/2.5/weather?lat=' + toString(lati) + '&lon=' + toString(long) + '&appid=$f1c0b3f419ad2992bfebd3104df6d7a7', true);
 
     xhr.onload = function() {
-        var data = JSON.parse(this.response);
+        let data = JSON.parse(this.response);
         weatherInfo = data;
     }
 
